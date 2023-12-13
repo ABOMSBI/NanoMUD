@@ -1,0 +1,39 @@
+# Usage
+
+### Feature extraction
+
+```bash
+cd /path/to/qc_final
+
+mkdir output
+python3 ./code/feature_extraction.py \
+-i ./test_data/single_fast5 \
+-o ./output \
+-t 3 --group RawGenomeCorrected_000
+```
+
+
+
+### Read-level probability prediction
+
+```bash
+python3 ./code/predict_mod_probs.py \
+-i ./output/tmp \
+-o ./output/probs.csv \
+--device cuda:0 \
+--model ./models/biLSTM_model \
+--scaler ./models/scaler
+```
+
+
+
+### Stoichiometry estimation
+
+```bash
+python3 ./code/mod_rate_calibration.py \
+-i ./output/probs.csv \
+-o ./output/mod_rate.csv \
+--device cuda:0 \
+--model ./models/regression_model
+```
+
