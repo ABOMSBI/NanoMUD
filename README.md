@@ -10,13 +10,21 @@ NanoMUD is a deep learning based framework for detecting Uridine modifications (
 
 Make sure that your data contain the `/Analyses/Basecall` group. If not, please do local base calling with Guppy, Albacore or other base callers.
 
+### Pod5 to Fast5
+
+If your raw data is POD5 format, you can use the `pod5`(https://pod5-file-format.readthedocs.io/en/latest/index.html) package to convert it to fast5.
+
+```bash
+pod5 covert to_fast5 pod5/*.pod5 --output fast5/*.fast5
+```
+
 ### Multi-to-single fast5
 
 Make sure your data are in single-fast5 format, since Tombo can only take single-fast5 file as input. 
 
 ### Resquiggle
 
-the Tombo resquiggle module will define a new assignment from raw signal to the reference sequence. Tombo documentation can be found here: https://nanoporetech.github.io/tombo/tombo.html. Please make sure you specify the `--include-event-stdev` option when running Tombo resquiggle module.
+The Tombo resquiggle module will define a new assignment from raw signal to the reference sequence. Tombo documentation can be found here: https://nanoporetech.github.io/tombo/tombo.html. Please make sure you specify the `--include-event-stdev` option when running Tombo resquiggle module.
 
 ## Analysis with NanoMUD
 
@@ -56,4 +64,5 @@ python3 ./code/mod_rate_calibration.py \
 --devide cuda:0 \
 --model ./model/psi/regression_model
 ```
+
 
